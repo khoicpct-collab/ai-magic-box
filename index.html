@@ -1,1 +1,360 @@
-<h1>Hello World</h1>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Magic Box - Công cụ AI Miễn phí</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --accent: #ff6b6b;
+            --dark: #2d3748;
+            --light: #f8f9fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            min-height: 100vh;
+            color: white;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .logo {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .title {
+            font-size: 2.8rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        /* Main Tools Grid */
+        .main-tools {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 3rem 0;
+        }
+
+        .tool-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .tool-card.featured {
+            background: rgba(255, 107, 107, 0.15);
+            border: 2px solid var(--accent);
+        }
+
+        .tool-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #ff6b6b, #667eea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tool-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tool-card p {
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* Features Section */
+        .features {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            padding: 1.5rem;
+        }
+
+        .feature-item i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.2rem;
+            }
+            
+            .main-tools {
+                grid-template-columns: 1fr;
+            }
+            
+            .features {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">🎁</div>
+            <h1 class="title">AI Magic Box</h1>
+            <p class="subtitle">Công cụ AI mạnh mẽ - Hoàn toàn miễn phí</p>
+        </header>
+
+        <!-- Main Tools Grid -->
+        <div class="main-tools">
+            <!-- Công cụ CHÍNH - Video to Prompt -->
+            <div class="tool-card featured" onclick="openTool('video-cloning')">
+                <div class="tool-icon">🎬</div>
+                <h3>Video Cloning Pro</h3>
+                <p>Phân tích video và tạo prompt chính xác. Nhân bản phong cách video với AI.</p>
+                <button class="btn">Dùng ngay</button>
+            </div>
+
+            <!-- Các công cụ khác -->
+            <div class="tool-card" onclick="openTool('image-enhancer')">
+                <div class="tool-icon">🖼️</div>
+                <h3>AI Image Enhancer</h3>
+                <p>Làm nét ảnh, phục hồi ảnh cũ, nâng cao chất lượng hình ảnh.</p>
+                <button class="btn">Cải thiện ảnh</button>
+            </div>
+
+            <div class="tool-card" onclick="openTool('pdf-tools')">
+                <div class="tool-icon">📄</div>
+                <h3>PDF Magic Tools</h3>
+                <p>Chỉnh sửa, chuyển đổi, merge PDF thông minh.</p>
+                <button class="btn">Xử lý PDF</button>
+            </div>
+
+            <div class="tool-card" onclick="openTool('remove-bg')">
+                <div class="tool-icon">✂️</div>
+                <h3>Background Remover</h3>
+                <p>Tách nền ảnh tự động với độ chính xác cao.</p>
+                <button class="btn">Xóa nền</button>
+            </div>
+
+            <div class="tool-card" onclick="openTool('ai-chat')">
+                <div class="tool-icon">🤖</div>
+                <h3>AI Chat Assistant</h3>
+                <p>Trợ lý AI thông minh, hỗ trợ đa nhiệm vụ.</p>
+                <button class="btn">Trò chuyện</button>
+            </div>
+
+            <div class="tool-card" onclick="openTool('audio-tools')">
+                <div class="tool-icon">🎵</div>
+                <h3>Audio AI Tools</h3>
+                <p>Chuyển đổi text-to-speech, xử lý âm thanh.</p>
+                <button class="btn">Xử lý audio</button>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <section class="features">
+            <h2 style="font-size: 2rem; margin-bottom: 1rem;">Tại sao chọn AI Magic Box?</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Nhanh chóng</h3>
+                    <p>Xử lý tức thì với công nghệ AI tiên tiến</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-lock"></i>
+                    <h3>Bảo mật</h3>
+                    <p>Dữ liệu được xử lý cục bộ, an toàn tuyệt đối</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-gem"></i>
+                    <h3>Miễn phí</h3>
+                    <p>Tất cả công cụ đều free, không giới hạn</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Mọi thiết bị</h3>
+                    <p>Hoạt động tốt trên desktop và mobile</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+            </div>
+            <p>© 2024 AI Magic Box - Công cụ AI miễn phí cho mọi người</p>
+            <p style="margin-top: 0.5rem; opacity: 0.7;">Made with ❤️ for the AI community</p>
+        </footer>
+    </div>
+
+    <script>
+        // Danh sách các công cụ
+        const tools = {
+            'video-cloning': 'video-cloning.html',
+            'image-enhancer': 'https://bgrem.ai/upscale',
+            'pdf-tools': 'https://ilovepdf.com/',
+            'remove-bg': 'https://www.photoroom.com/background-remover/',
+            'ai-chat': 'https://huggingface.co/chat',
+            'audio-tools': 'text-to-speech.html'
+        };
+
+        function openTool(toolId) {
+            const toolUrl = tools[toolId];
+            if (toolUrl) {
+                if (toolUrl.includes('http')) {
+                    // Mở tab mới cho các trang bên ngoài
+                    window.open(toolUrl, '_blank');
+                } else {
+                    // Mở trong cùng tab cho các trang nội bộ
+                    window.location.href = toolUrl;
+                }
+            }
+        }
+
+        // Thêm hiệu ứng khi scroll
+        window.addEventListener('scroll', () => {
+            const cards = document.querySelectorAll('.tool-card');
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (cardTop < windowHeight - 100) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        // Khởi tạo hiệu ứng
+        document.querySelectorAll('.tool-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s ease';
+        });
+
+        // Kích hoạt hiệu ứng sau khi trang load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelectorAll('.tool-card').forEach((card, index) => {
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, index * 100);
+                });
+            }, 500);
+        });
+    </script>
+</body>
+</html>
