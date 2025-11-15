@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio AI Tools - AI Magic Box</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1e40af;
+            --secondary: #3b82f6;
+            --accent: #60a5fa;
+            --success: #10b981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            min-height: 100vh;
+            color: white;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-bottom: 2rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .tool-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tool-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .tool-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .tool-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .tool-card p {
+            opacity: 0.8;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, var(--accent), #3b82f6);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        /* TTS Section */
+        .tts-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .input-group textarea {
+            width: 100%;
+            height: 120px;
+            padding: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 16px;
+            resize: vertical;
+        }
+
+        .input-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .control-group label {
+            font-weight: 600;
+        }
+
+        .control-group select {
+            padding: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .control-group select option {
+            background: var(--dark-blue);
+            color: white;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--success), #34d399);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .audio-preview {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            display: none;
+        }
+
+        .audio-preview audio {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .controls {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Quay lại AI Magic Box
+        </a>
+        
+        <div class="header">
+            <h1>🎵 Audio AI Tools</h1>
+            <p class="subtitle">Công cụ xử lý âm thanh thông minh - Hoàn toàn miễn phí</p>
+        </div>
+
+        <div class="tools-grid">
+            <div class="tool-card" onclick="showSection('tts')">
+                <div class="tool-icon">🗣️</div>
+                <h3>Text to Speech</h3>
+                <p>Chuyển văn bản thành giọng nói tự nhiên với nhiều giọng đọc</p>
+                <button class="btn">Sử dụng ngay</button>
+            </div>
+
+            <div class="tool-card" onclick="showSection('audio-edit')">
+                <div class="tool-icon">✂️</div>
+                <h3>Audio Editor</h3>
+                <p>Cắt, ghép, chỉnh sửa file âm thanh trực tuyến</p>
+                <button class="btn">Chỉnh sửa</button>
+            </div>
+
+            <div class="tool-card" onclick="showSection('voice-clone')">
+                <div class="tool-icon">👥</div>
+                <h3>Voice Cloning</h3>
+                <p>Nhân bản giọng nói với công nghệ AI tiên tiến</p>
+                <button class="btn">Nhân bản</button>
+            </div>
+        </div>
+
+        <!-- Text to Speech Section -->
+        <div class="tts-section" id="ttsSection">
+            <h2><i class="fas fa-comment-dots"></i> Text to Speech</h2>
+            <p>Chuyển đổi văn bản thành giọng nói chất lượng cao</p>
+            
+            <div class="input-group">
+                <label for="textInput">Nhập văn bản cần chuyển đổi:</label>
+                <textarea id="textInput" placeholder="Nhập văn bản của bạn tại đây... (Tối đa 1000 ký tự)"></textarea>
+                <div style="text-align: right; margin-top: 5px; font-size: 0.9rem; opacity: 0.7;">
+                    <span id="charCount">0</span>/1000 ký tự
+                </div>
+            </div>
+
+            <div class="controls">
+                <div class="control-group">
+                    <label for="voiceSelect">Chọn giọng đọc:</label>
+                    <select id="voiceSelect">
+                        <option value="">Đang tải giọng đọc...</option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <label for="rateSelect">Tốc độ đọc:</label>
+                    <select id="rateSelect">
+                        <option value="0.5">Rất chậm</option>
+                        <option value="0.75">Chậm</option>
+                        <option value="1" selected>Bình thường</option>
+                        <option value="1.25">Nhanh</option>
+                        <option value="1.5">Rất nhanh</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="speakBtn">
+                    <i class="fas fa-play"></i> Phát âm thanh
+                </button>
+                <button class="btn btn-secondary" id="stopBtn">
+                    <i class="fas fa-stop"></i> Dừng lại
+                </button>
+                <button class="btn btn-secondary" id="downloadBtn" disabled>
+                    <i class="fas fa-download"></i> Tải xuống
+                </button>
+            </div>
+
+            <div class="audio-preview" id="audioPreview">
+                <p><strong>Bản xem trước:</strong></p>
+                <audio id="previewAudio" controls></audio>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const textInput = document.getElementById('textInput');
+        const voiceSelect = document.getElementById('voiceSelect');
+        const rateSelect = document.getElementById('rateSelect');
+        const speakBtn = document.getElementById('speakBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const audioPreview = document.getElementById('audioPreview');
+        const previewAudio = document.getElementById('previewAudio');
+        const charCount = document.getElementById('charCount');
+
+        let voices = [];
+        let currentSpeech = null;
+
+        // Initialize voices
+        function loadVoices() {
+            voices = speechSynthesis.getVoices();
+            voiceSelect.innerHTML = '';
+            
+            // Filter Vietnamese voices if available
+            const vietnameseVoices = voices.filter(voice => 
+                voice.lang.includes('vi') || voice.lang.includes('VN')
+            );
+            
+            const otherVoices = voices.filter(voice => 
+                !voice.lang.includes('vi') && !voice.lang.includes('VN')
+            );
+
+            if (vietnameseVoices.length > 0) {
+                vietnameseVoices.forEach(voice => {
+                    const option = document.createElement('option');
+                    option.value = voice.name;
+                    option.textContent = `${voice.name} (Tiếng Việt)`;
+                    voiceSelect.appendChild(option);
+                });
+            }
+
+            otherVoices.forEach(voice => {
+                const option = document.createElement('option');
+                option.value = voice.name;
+                option.textContent = `${voice.name} (${voice.lang})`;
+                voiceSelect.appendChild(option);
+            });
+
+            if (voices.length === 0) {
+                voiceSelect.innerHTML = '<option value="">Không tìm thấy giọng đọc</option>';
+            }
+        }
+
+        // Event Listeners
+        textInput.addEventListener('input', function() {
+            const count = this.value.length;
+            charCount.textContent = count;
+            
+            if (count > 1000) {
+                this.value = this.value.substring(0, 1000);
+                charCount.textContent = 1000;
+                charCount.style.color = '#ff6b6b';
+            } else {
+                charCount.style.color = 'rgba(255, 255, 255, 0.7)';
+            }
+        });
+
+        speakBtn.addEventListener('click', speakText);
+        stopBtn.addEventListener('click', stopSpeaking);
+
+        // Load voices when available
+        speechSynthesis.onvoiceschanged = loadVoices;
+        loadVoices(); // Initial load
+
+        function speakText() {
+            const text = textInput.value.trim();
+            if (!text) {
+                alert('Vui lòng nhập văn bản cần chuyển đổi!');
+                return;
+            }
+
+            if (text.length > 1000) {
+                alert('Văn bản quá dài! Vui lòng nhập tối đa 1000 ký tự.');
+                return;
+            }
+
+            stopSpeaking(); // Stop any current speech
+
+            const selectedVoice = voiceSelect.value;
+            const rate = parseFloat(rateSelect.value);
+
+            currentSpeech = new SpeechSynthesisUtterance(text);
+            
+            if (selectedVoice) {
+                const voice = voices.find(v => v.name === selectedVoice);
+                if (voice) {
+                    currentSpeech.voice = voice;
+                }
+            }
+
+            currentSpeech.rate = rate;
+            currentSpeech.pitch = 1;
+            currentSpeech.volume = 1;
+
+            currentSpeech.onend = function() {
+                speakBtn.disabled = false;
+                speakBtn.innerHTML = '<i class="fas fa-play"></i> Phát âm thanh';
+                downloadBtn.disabled = false;
+            };
+
+            currentSpeech.onerror = function(event) {
+                console.error('Speech synthesis error:', event);
+                alert('Có lỗi xảy ra khi phát âm thanh. Vui lòng thử lại!');
+                speakBtn.disabled = false;
+                speakBtn.innerHTML = '<i class="fas fa-play"></i> Phát âm thanh';
+            };
+
+            speakBtn.disabled = true;
+            speakBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang xử lý...';
+            
+            speechSynthesis.speak(currentSpeech);
+            audioPreview.style.display = 'block';
+        }
+
+        function stopSpeaking() {
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+                speakBtn.disabled = false;
+                speakBtn.innerHTML = '<i class="fas fa-play"></i> Phát âm thanh';
+            }
+        }
+
+        function showSection(section) {
+            alert(`Tính năng "${section}" đang được phát triển! Hiện tại bạn có thể sử dụng Text to Speech.`);
+        }
+
+        // Add animation on load
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.tool-card, .tts-section');
+            elements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'all 0.6s ease';
+                
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>
