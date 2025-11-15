@@ -530,39 +530,73 @@
         };
 
         // Danh sách sản phẩm Shopee
-        const shopeeProducts = {
-            'airpods': 'https://shopee.vn/search?keyword=tai%20nghe%20bluetooth',
-            'phone': 'https://shopee.vn/search?keyword=iphone',
-            'watch': 'https://shopee.vn/search?keyword=đồng%20hồ%20thông%20minh',
-            'laptop': 'https://shopee.vn/search?keyword=laptop%20gaming',
-            'camera': 'https://shopee.vn/search?keyword=camera%20an%20ninh',
-            'keyboard': 'https://shopee.vn/search?keyword=bàn%20phím%20cơ'
-        };
+       // Thay thế phần shopeeProducts trong index.html bằng:
+const shopeeProducts = {
+    'airpods': {
+        url: 'https://shopee.vn/search?keyword=tai%20nghe%20bluetooth',
+        name: 'Tai nghe Bluetooth',
+        price: '299.000₫',
+        sold: '50K+'
+    },
+    'iphone': {
+        url: 'https://shopee.vn/search?keyword=iphone%2015',
+        name: 'iPhone 15 Pro Max',
+        price: '25.990.000₫',
+        sold: '5K+'
+    },
+    'watch': {
+        url: 'https://shopee.vn/search?keyword=apple%20watch',
+        name: 'Apple Watch Series 9',
+        price: '8.990.000₫', 
+        sold: '10K+'
+    },
+    'laptop': {
+        url: 'https://shopee.vn/search?keyword=laptop%20gaming',
+        name: 'Laptop Gaming RTX 4060',
+        price: '25.000.000₫',
+        sold: '2K+'
+    },
+    'camera': {
+        url: 'https://shopee.vn/search?keyword=camera%20ip',
+        name: 'Camera IP Wifi 4MP',
+        price: '450.000₫',
+        sold: '30K+'
+    },
+    'keyboard': {
+        url: 'https://shopee.vn/search?keyword=b%C3%A0n%20ph%C3%ADm%20c%C6%A1',
+        name: 'Bàn phím cơ Dareu',
+        price: '690.000₫',
+        sold: '15K+'
+    },
+    'ssd': {
+        url: 'https://shopee.vn/search?keyword=ssd%201tb',
+        name: 'SSD 1TB Samsung',
+        price: '1.290.000₫',
+        sold: '20K+'
+    },
+    'tablet': {
+        url: 'https://shopee.vn/search?keyword=ipad',
+        name: 'iPad Pro M1 11"',
+        price: '15.990.000₫',
+        sold: '8K+'
+    }
+};
 
-        function openTool(toolId) {
-            const toolUrl = tools[toolId];
-            if (toolUrl) {
-                if (toolUrl.includes('http')) {
-                    window.open(toolUrl, '_blank');
-                } else {
-                    window.location.href = toolUrl;
-                }
-            }
-        }
+// Cập nhật function openShopee
+function openShopee(productId) {
+    const product = shopeeProducts[productId];
+    if (product) {
+        window.open(product.url, '_blank');
+    }
+}
 
-        function openPlatform(platformId) {
-            const platformUrl = platforms[platformId];
-            if (platformUrl) {
-                window.open(platformUrl, '_blank');
-            }
-        }
-
-        function openShopee(productId) {
-            const shopeeUrl = shopeeProducts[productId];
-            if (shopeeUrl) {
-                window.open(shopeeUrl, '_blank');
-            }
-        }
+// Thêm function để hiển thị chi tiết sản phẩm
+function showProductDetail(productId) {
+    const product = shopeeProducts[productId];
+    if (product) {
+        alert(`${product.name}\n💰 Giá: ${product.price}\n🛒 Đã bán: ${product.sold}`);
+    }
+}
 
         function editHeader() {
             const newTitle = prompt('Nhập tiêu đề mới:', 'AI Magic Box');
