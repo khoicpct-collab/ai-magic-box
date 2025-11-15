@@ -7,11 +7,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #667eea;
-            --secondary: #764ba2;
-            --accent: #ff6b6b;
-            --dark: #2d3748;
-            --light: #f8f9fa;
+            --primary: #1e40af;
+            --secondary: #3b82f6;
+            --accent: #60a5fa;
+            --dark-blue: #1e3a8a;
+            --light-blue: #dbeafe;
+            --text-dark: #1f2937;
         }
 
         * {
@@ -29,142 +30,269 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 30px;
         }
 
         /* Header */
         .header {
-            text-align: center;
-            padding: 3rem 0;
+            grid-column: 1 / -1;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b6b, #3b82f6, #60a5fa);
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 1.5rem;
         }
 
         .logo {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .title {
-            font-size: 2.8rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, #fff, #ffd700);
+            font-size: 3rem;
+            background: linear-gradient(45deg, #fff, #60a5fa);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .subtitle {
-            font-size: 1.3rem;
-            opacity: 0.9;
-            margin-bottom: 2rem;
+        .title-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, #fff, #dbeafe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        /* Main Tools Grid */
-        .main-tools {
+        .title-section p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .edit-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .edit-badge:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Main Content */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        /* Tools Section */
+        .tools-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--light-blue);
+        }
+
+        .tools-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin: 3rem 0;
+            gap: 20px;
         }
 
         .tool-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 1.5rem;
             transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             cursor: pointer;
         }
 
         .tool-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-5px);
+            border-color: var(--accent);
         }
 
         .tool-card.featured {
-            background: rgba(255, 107, 107, 0.15);
+            background: rgba(96, 165, 250, 0.15);
             border: 2px solid var(--accent);
         }
 
         .tool-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(45deg, #ff6b6b, #667eea);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .tool-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .tool-card p {
-            margin-bottom: 1.5rem;
-            opacity: 0.8;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 25px;
-            background: var(--accent);
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background: #ff5252;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 2px solid white;
-        }
-
-        .btn-outline:hover {
-            background: white;
-            color: var(--primary);
-        }
-
-        /* Features Section */
-        .features {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 3rem;
-            margin: 3rem 0;
-            text-align: center;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .feature-item {
-            padding: 1.5rem;
-        }
-
-        .feature-item i {
             font-size: 2.5rem;
             margin-bottom: 1rem;
             color: var(--accent);
         }
 
+        .tool-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .tool-card p {
+            opacity: 0.8;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            background: #3b82f6;
+            transform: translateY(-2px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        /* AI Platforms Section */
+        .ai-platforms {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .platforms-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .platform-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .platform-card:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-3px);
+        }
+
+        .platform-icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+
+        .platform-card span {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Shopee Trends */
+        .shopee-trends {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .trends-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .trend-item {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .trend-item:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateX(5px);
+        }
+
+        .trend-number {
+            background: var(--accent);
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .trend-item span {
+            flex: 1;
+            font-size: 0.9rem;
+        }
+
         /* Footer */
         .footer {
+            grid-column: 1 / -1;
             text-align: center;
             padding: 2rem 0;
             margin-top: 3rem;
@@ -180,7 +308,7 @@
 
         .social-links a {
             color: white;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             transition: color 0.3s ease;
         }
 
@@ -189,17 +317,32 @@
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .title {
-                font-size: 2.2rem;
-            }
-            
-            .main-tools {
+        @media (max-width: 1024px) {
+            .container {
                 grid-template-columns: 1fr;
             }
             
-            .features {
-                padding: 2rem 1rem;
+            .platforms-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .platforms-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .header {
+                padding: 1.5rem;
+            }
+            
+            .logo-section {
+                flex-direction: column;
+                text-align: center;
             }
         }
     </style>
@@ -208,84 +351,147 @@
     <div class="container">
         <!-- Header -->
         <header class="header">
-            <div class="logo">🎁</div>
-            <h1 class="title">AI Magic Box</h1>
-            <p class="subtitle">Công cụ AI mạnh mẽ - Hoàn toàn miễn phí</p>
+            <div class="edit-badge" onclick="editHeader()">
+                <i class="fas fa-edit"></i> Tùy chỉnh
+            </div>
+            <div class="logo-section">
+                <div class="logo">🎁</div>
+                <div class="title-section">
+                    <h1>AI Magic Box</h1>
+                    <p>Công cụ AI mạnh mẽ - Hoàn toàn miễn phí</p>
+                </div>
+            </div>
         </header>
 
-        <!-- Main Tools Grid -->
-        <div class="main-tools">
-            <!-- Công cụ CHÍNH - Video to Prompt -->
-            <div class="tool-card featured" onclick="openTool('video-cloning')">
-                <div class="tool-icon">🎬</div>
-                <h3>Video Cloning Pro</h3>
-                <p>Phân tích video và tạo prompt chính xác. Nhân bản phong cách video với AI.</p>
-                <button class="btn">Dùng ngay</button>
-            </div>
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Video Cloning Pro - Featured -->
+            <section class="tools-section">
+                <h2 class="section-title"><i class="fas fa-star"></i> Công cụ chính</h2>
+                <div class="tools-grid">
+                    <div class="tool-card featured" onclick="openTool('video-cloning')">
+                        <div class="tool-icon">🎬</div>
+                        <h3>Video Cloning Pro</h3>
+                        <p>Phân tích video và tạo prompt chính xác cao. Nhân bản phong cách video với AI tiên tiến.</p>
+                        <button class="btn">Dùng ngay</button>
+                    </div>
+                </div>
+            </section>
 
-            <!-- Các công cụ khác -->
-            <div class="tool-card" onclick="openTool('image-enhancer')">
-                <div class="tool-icon">🖼️</div>
-                <h3>AI Image Enhancer</h3>
-                <p>Làm nét ảnh, phục hồi ảnh cũ, nâng cao chất lượng hình ảnh.</p>
-                <button class="btn">Cải thiện ảnh</button>
-            </div>
+            <!-- Other AI Tools -->
+            <section class="tools-section">
+                <h2 class="section-title"><i class="fas fa-tools"></i> Công cụ AI khác</h2>
+                <div class="tools-grid">
+                    <div class="tool-card" onclick="openTool('image-enhancer')">
+                        <div class="tool-icon">🖼️</div>
+                        <h3>AI Image Enhancer</h3>
+                        <p>Làm nét ảnh, phục hồi ảnh cũ, nâng cao chất lượng hình ảnh.</p>
+                        <button class="btn">Cải thiện ảnh</button>
+                    </div>
 
-            <div class="tool-card" onclick="openTool('pdf-tools')">
-                <div class="tool-icon">📄</div>
-                <h3>PDF Magic Tools</h3>
-                <p>Chỉnh sửa, chuyển đổi, merge PDF thông minh.</p>
-                <button class="btn">Xử lý PDF</button>
-            </div>
+                    <div class="tool-card" onclick="openTool('pdf-tools')">
+                        <div class="tool-icon">📄</div>
+                        <h3>PDF Magic Tools</h3>
+                        <p>Chỉnh sửa, chuyển đổi, merge PDF thông minh.</p>
+                        <button class="btn">Xử lý PDF</button>
+                    </div>
 
-            <div class="tool-card" onclick="openTool('remove-bg')">
-                <div class="tool-icon">✂️</div>
-                <h3>Background Remover</h3>
-                <p>Tách nền ảnh tự động với độ chính xác cao.</p>
-                <button class="btn">Xóa nền</button>
-            </div>
+                    <div class="tool-card" onclick="openTool('remove-bg')">
+                        <div class="tool-icon">✂️</div>
+                        <h3>Background Remover</h3>
+                        <p>Tách nền ảnh tự động với độ chính xác cao.</p>
+                        <button class="btn">Xóa nền</button>
+                    </div>
 
-            <div class="tool-card" onclick="openTool('ai-chat')">
-                <div class="tool-icon">🤖</div>
-                <h3>AI Chat Assistant</h3>
-                <p>Trợ lý AI thông minh, hỗ trợ đa nhiệm vụ.</p>
-                <button class="btn">Trò chuyện</button>
-            </div>
+                    <div class="tool-card" onclick="openTool('ai-chat')">
+                        <div class="tool-icon">🤖</div>
+                        <h3>AI Chat Assistant</h3>
+                        <p>Trợ lý AI thông minh, hỗ trợ đa nhiệm vụ.</p>
+                        <button class="btn">Trò chuyện</button>
+                    </div>
 
-            <div class="tool-card" onclick="openTool('audio-tools')">
-                <div class="tool-icon">🎵</div>
-                <h3>Audio AI Tools</h3>
-                <p>Chuyển đổi text-to-speech, xử lý âm thanh.</p>
-                <button class="btn">Xử lý audio</button>
-            </div>
+                    <div class="tool-card" onclick="openTool('audio-tools')">
+                        <div class="tool-icon">🎵</div>
+                        <h3>Audio AI Tools</h3>
+                        <p>Chuyển đổi text-to-speech, xử lý âm thanh.</p>
+                        <button class="btn">Xử lý audio</button>
+                    </div>
+                </div>
+            </section>
         </div>
 
-        <!-- Features Section -->
-        <section class="features">
-            <h2 style="font-size: 2rem; margin-bottom: 1rem;">Tại sao chọn AI Magic Box?</h2>
-            <div class="features-grid">
-                <div class="feature-item">
-                    <i class="fas fa-bolt"></i>
-                    <h3>Nhanh chóng</h3>
-                    <p>Xử lý tức thì với công nghệ AI tiên tiến</p>
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- AI Platforms -->
+            <section class="ai-platforms">
+                <h2 class="section-title"><i class="fas fa-robot"></i> AI Platforms</h2>
+                <div class="platforms-grid">
+                    <div class="platform-card" onclick="openPlatform('deepseek')">
+                        <div class="platform-icon">🤖</div>
+                        <span>DeepSeek</span>
+                    </div>
+                    <div class="platform-card" onclick="openPlatform('grok')">
+                        <div class="platform-icon">🧠</div>
+                        <span>Grok</span>
+                    </div>
+                    <div class="platform-card" onclick="openPlatform('dreamina')">
+                        <div class="platform-icon">🎨</div>
+                        <span>Dreamina</span>
+                    </div>
+                    <div class="platform-card" onclick="openPlatform('pencil')">
+                        <div class="platform-icon">✏️</div>
+                        <span>Pencil</span>
+                    </div>
+                    <div class="platform-card" onclick="openPlatform('tiktok')">
+                        <div class="platform-icon">🎵</div>
+                        <span>TikTok</span>
+                    </div>
+                    <div class="platform-card" onclick="openPlatform('canva')">
+                        <div class="platform-icon">🎭</div>
+                        <span>Canva</span>
+                    </div>
+                    <div class="platform-card" onclick="openPlatform('invideo')">
+                        <div class="platform-icon">🎬</div>
+                        <span>InVideo</span>
+                    </div>
+                    <div class="platform-card" onclick="openPlatform('leonardo')">
+                        <div class="platform-icon">🖼️</div>
+                        <span>Leonardo</span>
+                    </div>
                 </div>
-                <div class="feature-item">
-                    <i class="fas fa-lock"></i>
-                    <h3>Bảo mật</h3>
-                    <p>Dữ liệu được xử lý cục bộ, an toàn tuyệt đối</p>
+            </section>
+
+            <!-- Shopee Trends -->
+            <section class="shopee-trends">
+                <h2 class="section-title"><i class="fas fa-chart-line"></i> Top Shopee</h2>
+                <div class="trends-list">
+                    <div class="trend-item" onclick="openShopee('airpods')">
+                        <div class="trend-number">1</div>
+                        <span>Tai nghe Bluetooth</span>
+                    </div>
+                    <div class="trend-item" onclick="openShopee('phone')">
+                        <div class="trend-number">2</div>
+                        <span>Điện thoại iPhone</span>
+                    </div>
+                    <div class="trend-item" onclick="openShopee('watch')">
+                        <div class="trend-number">3</div>
+                        <span>Đồng hồ thông minh</span>
+                    </div>
+                    <div class="trend-item" onclick="openShopee('laptop')">
+                        <div class="trend-number">4</div>
+                        <span>Laptop gaming</span>
+                    </div>
+                    <div class="trend-item" onclick="openShopee('camera')">
+                        <div class="trend-number">5</div>
+                        <span>Camera an ninh</span>
+                    </div>
+                    <div class="trend-item" onclick="openShopee('keyboard')">
+                        <div class="trend-number">6</div>
+                        <span>Bàn phím cơ</span>
+                    </div>
                 </div>
-                <div class="feature-item">
-                    <i class="fas fa-gem"></i>
-                    <h3>Miễn phí</h3>
-                    <p>Tất cả công cụ đều free, không giới hạn</p>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-mobile-alt"></i>
-                    <h3>Mọi thiết bị</h3>
-                    <p>Hoạt động tốt trên desktop và mobile</p>
-                </div>
-            </div>
-        </section>
+            </section>
+        </div>
 
         <!-- Footer -->
         <footer class="footer">
@@ -311,49 +517,77 @@
             'audio-tools': 'text-to-speech.html'
         };
 
+        // Danh sách AI Platforms
+        const platforms = {
+            'deepseek': 'https://www.deepseek.com/',
+            'grok': 'https://grok.x.ai/',
+            'dreamina': 'https://dreamina.bytedance.com/',
+            'pencil': 'https://pencil.app/',
+            'tiktok': 'https://www.tiktok.com/',
+            'canva': 'https://www.canva.com/',
+            'invideo': 'https://invideo.io/',
+            'leonardo': 'https://leonardo.ai/'
+        };
+
+        // Danh sách sản phẩm Shopee
+        const shopeeProducts = {
+            'airpods': 'https://shopee.vn/search?keyword=tai%20nghe%20bluetooth',
+            'phone': 'https://shopee.vn/search?keyword=iphone',
+            'watch': 'https://shopee.vn/search?keyword=đồng%20hồ%20thông%20minh',
+            'laptop': 'https://shopee.vn/search?keyword=laptop%20gaming',
+            'camera': 'https://shopee.vn/search?keyword=camera%20an%20ninh',
+            'keyboard': 'https://shopee.vn/search?keyword=bàn%20phím%20cơ'
+        };
+
         function openTool(toolId) {
             const toolUrl = tools[toolId];
             if (toolUrl) {
                 if (toolUrl.includes('http')) {
-                    // Mở tab mới cho các trang bên ngoài
                     window.open(toolUrl, '_blank');
                 } else {
-                    // Mở trong cùng tab cho các trang nội bộ
                     window.location.href = toolUrl;
                 }
             }
         }
 
-        // Thêm hiệu ứng khi scroll
-        window.addEventListener('scroll', () => {
-            const cards = document.querySelectorAll('.tool-card');
-            cards.forEach(card => {
-                const cardTop = card.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                if (cardTop < windowHeight - 100) {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }
-            });
-        });
+        function openPlatform(platformId) {
+            const platformUrl = platforms[platformId];
+            if (platformUrl) {
+                window.open(platformUrl, '_blank');
+            }
+        }
 
-        // Khởi tạo hiệu ứng
-        document.querySelectorAll('.tool-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = 'all 0.6s ease';
-        });
+        function openShopee(productId) {
+            const shopeeUrl = shopeeProducts[productId];
+            if (shopeeUrl) {
+                window.open(shopeeUrl, '_blank');
+            }
+        }
 
-        // Kích hoạt hiệu ứng sau khi trang load
+        function editHeader() {
+            const newTitle = prompt('Nhập tiêu đề mới:', 'AI Magic Box');
+            const newDescription = prompt('Nhập mô tả mới:', 'Công cụ AI mạnh mẽ - Hoàn toàn miễn phí');
+            
+            if (newTitle) {
+                document.querySelector('.title-section h1').textContent = newTitle;
+            }
+            if (newDescription) {
+                document.querySelector('.title-section p').textContent = newDescription;
+            }
+        }
+
+        // Hiệu ứng khi load trang
         window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.querySelectorAll('.tool-card').forEach((card, index) => {
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
-                    }, index * 100);
-                });
-            }, 500);
+            document.querySelectorAll('.tool-card, .platform-card, .trend-item').forEach((element, index) => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'all 0.5s ease';
+                
+                setTimeout(() => {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
         });
     </script>
 </body>
