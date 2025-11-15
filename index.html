@@ -10,6 +10,8 @@
             --primary: #1e40af;
             --secondary: #3b82f6;
             --accent: #60a5fa;
+            --success: #10b981;
+            --warning: #f59e0b;
             --dark-blue: #1e3a8a;
             --light-blue: #dbeafe;
             --text-dark: #1f2937;
@@ -88,9 +90,28 @@
             font-size: 1.1rem;
         }
 
-        .edit-badge {
+        .status-badge {
             position: absolute;
             top: 20px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+
+        .status-badge.offline {
+            background: var(--warning);
+        }
+
+        .edit-badge {
+            position: absolute;
+            top: 60px;
             right: 20px;
             background: rgba(255, 255, 255, 0.2);
             padding: 8px 15px;
@@ -142,6 +163,23 @@
             transition: all 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.1);
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .tool-card:hover::before {
+            left: 100%;
         }
 
         .tool-card:hover {
@@ -190,6 +228,16 @@
         .btn:hover {
             background: #3b82f6;
             transform: translateY(-2px);
+        }
+
+        .tool-status {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 0.8rem;
+            padding: 4px 8px;
+            border-radius: 10px;
+            background: var(--success);
         }
 
         /* Sidebar */
@@ -285,9 +333,30 @@
             font-weight: bold;
         }
 
-        .trend-item span {
+        .trend-info {
             flex: 1;
+        }
+
+        .trend-name {
             font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .trend-details {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+
+        .trend-price {
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .trend-sold {
+            color: var(--accent);
         }
 
         /* Footer */
@@ -314,6 +383,33 @@
 
         .social-links a:hover {
             color: var(--accent);
+        }
+
+        /* Mode Selector */
+        .mode-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 15px;
+            justify-content: center;
+        }
+
+        .mode-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid transparent;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .mode-btn.active {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: var(--accent);
         }
 
         /* Responsive */
@@ -344,6 +440,15 @@
                 flex-direction: column;
                 text-align: center;
             }
+
+            .mode-selector {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .mode-btn {
+                width: 200px;
+            }
         }
     </style>
 </head>
@@ -351,6 +456,9 @@
     <div class="container">
         <!-- Header -->
         <header class="header">
+            <div class="status-badge" id="statusBadge">
+                <i class="fas fa-wifi"></i> Đang trực tuyến
+            </div>
             <div class="edit-badge" onclick="editHeader()">
                 <i class="fas fa-edit"></i> Tùy chỉnh
             </div>
@@ -361,6 +469,16 @@
                     <p>Công cụ AI mạnh mẽ - Hoàn toàn miễn phí</p>
                 </div>
             </div>
+
+            <!-- Mode Selector -->
+            <div class="mode-selector">
+                <button class="mode-btn active" onclick="setMode('online')">
+                    <i class="fas fa-wifi"></i> Chế độ Online
+                </button>
+                <button class="mode-btn" onclick="setMode('hybrid')">
+                    <i class="fas fa-sync"></i> Chế độ Hybrid
+                </button>
+            </div>
         </header>
 
         <!-- Main Content -->
@@ -370,10 +488,13 @@
                 <h2 class="section-title"><i class="fas fa-star"></i> Công cụ chính</h2>
                 <div class="tools-grid">
                     <div class="tool-card featured" onclick="openTool('video-cloning')">
+                        <div class="tool-status">✅ Hoạt động</div>
                         <div class="tool-icon">🎬</div>
                         <h3>Video Cloning Pro</h3>
                         <p>Phân tích video và tạo prompt chính xác cao. Nhân bản phong cách video với AI tiên tiến.</p>
-                        <button class="btn">Dùng ngay</button>
+                        <button class="btn">
+                            <i class="fas fa-play"></i> Dùng ngay
+                        </button>
                     </div>
                 </div>
             </section>
@@ -383,38 +504,63 @@
                 <h2 class="section-title"><i class="fas fa-tools"></i> Công cụ AI khác</h2>
                 <div class="tools-grid">
                     <div class="tool-card" onclick="openTool('image-enhancer')">
+                        <div class="tool-status">🌐 Online</div>
                         <div class="tool-icon">🖼️</div>
                         <h3>AI Image Enhancer</h3>
                         <p>Làm nét ảnh, phục hồi ảnh cũ, nâng cao chất lượng hình ảnh.</p>
-                        <button class="btn">Cải thiện ảnh</button>
+                        <button class="btn">
+                            <i class="fas fa-magic"></i> Cải thiện ảnh
+                        </button>
                     </div>
 
                     <div class="tool-card" onclick="openTool('pdf-tools')">
+                        <div class="tool-status">🌐 Online</div>
                         <div class="tool-icon">📄</div>
                         <h3>PDF Magic Tools</h3>
                         <p>Chỉnh sửa, chuyển đổi, merge PDF thông minh.</p>
-                        <button class="btn">Xử lý PDF</button>
+                        <button class="btn">
+                            <i class="fas fa-file-pdf"></i> Xử lý PDF
+                        </button>
                     </div>
 
                     <div class="tool-card" onclick="openTool('remove-bg')">
+                        <div class="tool-status">🌐 Online</div>
                         <div class="tool-icon">✂️</div>
                         <h3>Background Remover</h3>
                         <p>Tách nền ảnh tự động với độ chính xác cao.</p>
-                        <button class="btn">Xóa nền</button>
+                        <button class="btn">
+                            <i class="fas fa-cut"></i> Xóa nền
+                        </button>
                     </div>
 
                     <div class="tool-card" onclick="openTool('ai-chat')">
+                        <div class="tool-status">🌐 Online</div>
                         <div class="tool-icon">🤖</div>
                         <h3>AI Chat Assistant</h3>
                         <p>Trợ lý AI thông minh, hỗ trợ đa nhiệm vụ.</p>
-                        <button class="btn">Trò chuyện</button>
+                        <button class="btn">
+                            <i class="fas fa-comments"></i> Trò chuyện
+                        </button>
                     </div>
 
                     <div class="tool-card" onclick="openTool('audio-tools')">
+                        <div class="tool-status">✅ Hoạt động</div>
                         <div class="tool-icon">🎵</div>
                         <h3>Audio AI Tools</h3>
                         <p>Chuyển đổi text-to-speech, xử lý âm thanh.</p>
-                        <button class="btn">Xử lý audio</button>
+                        <button class="btn">
+                            <i class="fas fa-volume-up"></i> Xử lý audio
+                        </button>
+                    </div>
+
+                    <div class="tool-card" onclick="openTool('text-tools')">
+                        <div class="tool-status">✅ Hoạt động</div>
+                        <div class="tool-icon">📝</div>
+                        <h3>Text AI Tools</h3>
+                        <p>Xử lý văn bản thông minh, dịch thuật, tóm tắt.</p>
+                        <button class="btn">
+                            <i class="fas fa-font"></i> Xử lý văn bản
+                        </button>
                     </div>
                 </div>
             </section>
@@ -467,27 +613,63 @@
                 <div class="trends-list">
                     <div class="trend-item" onclick="openShopee('airpods')">
                         <div class="trend-number">1</div>
-                        <span>Tai nghe Bluetooth</span>
+                        <div class="trend-info">
+                            <div class="trend-name">Tai nghe Bluetooth</div>
+                            <div class="trend-details">
+                                <span class="trend-price">299.000₫</span>
+                                <span class="trend-sold">Đã bán 50K+</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="trend-item" onclick="openShopee('phone')">
+                    <div class="trend-item" onclick="openShopee('iphone')">
                         <div class="trend-number">2</div>
-                        <span>Điện thoại iPhone</span>
+                        <div class="trend-info">
+                            <div class="trend-name">iPhone 15 Pro Max</div>
+                            <div class="trend-details">
+                                <span class="trend-price">25.990.000₫</span>
+                                <span class="trend-sold">Đã bán 5K+</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="trend-item" onclick="openShopee('watch')">
                         <div class="trend-number">3</div>
-                        <span>Đồng hồ thông minh</span>
+                        <div class="trend-info">
+                            <div class="trend-name">Apple Watch Series 9</div>
+                            <div class="trend-details">
+                                <span class="trend-price">8.990.000₫</span>
+                                <span class="trend-sold">Đã bán 10K+</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="trend-item" onclick="openShopee('laptop')">
                         <div class="trend-number">4</div>
-                        <span>Laptop gaming</span>
+                        <div class="trend-info">
+                            <div class="trend-name">Laptop Gaming RTX 4060</div>
+                            <div class="trend-details">
+                                <span class="trend-price">25.000.000₫</span>
+                                <span class="trend-sold">Đã bán 2K+</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="trend-item" onclick="openShopee('camera')">
                         <div class="trend-number">5</div>
-                        <span>Camera an ninh</span>
+                        <div class="trend-info">
+                            <div class="trend-name">Camera IP Wifi 4MP</div>
+                            <div class="trend-details">
+                                <span class="trend-price">450.000₫</span>
+                                <span class="trend-sold">Đã bán 30K+</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="trend-item" onclick="openShopee('keyboard')">
                         <div class="trend-number">6</div>
-                        <span>Bàn phím cơ</span>
+                        <div class="trend-info">
+                            <div class="trend-name">Bàn phím cơ Dareu</div>
+                            <div class="trend-details">
+                                <span class="trend-price">690.000₫</span>
+                                <span class="trend-sold">Đã bán 15K+</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -503,21 +685,56 @@
             </div>
             <p>© 2024 AI Magic Box - Công cụ AI miễn phí cho mọi người</p>
             <p style="margin-top: 0.5rem; opacity: 0.7;">Made with ❤️ for the AI community</p>
+            <div style="margin-top: 1rem; opacity: 0.6; font-size: 0.9rem;">
+                <span id="connectionStatus">Đang kiểm tra kết nối...</span>
+            </div>
         </footer>
     </div>
 
     <script>
-        // Danh sách các công cụ
+        // Current mode
+        let currentMode = 'online';
+
+        // Enhanced tools list with status
         const tools = {
-            'video-cloning': 'video-cloning.html',
-            'image-enhancer': 'https://bgrem.ai/upscale',
-            'pdf-tools': 'https://ilovepdf.com/',
-            'remove-bg': 'https://www.photoroom.com/background-remover/',
-            'ai-chat': 'https://huggingface.co/chat',
-            'audio-tools': 'text-to-speech.html'
+            'video-cloning': {
+                url: 'video-cloning.html',
+                status: 'active',
+                name: 'Video Cloning Pro'
+            },
+            'image-enhancer': {
+                url: 'https://bgrem.ai/upscale',
+                status: 'online',
+                name: 'AI Image Enhancer'
+            },
+            'pdf-tools': {
+                url: 'https://ilovepdf.com/',
+                status: 'online', 
+                name: 'PDF Magic Tools'
+            },
+            'remove-bg': {
+                url: 'https://www.photoroom.com/background-remover/',
+                status: 'online',
+                name: 'Background Remover'
+            },
+            'ai-chat': {
+                url: 'https://huggingface.co/chat',
+                status: 'online',
+                name: 'AI Chat Assistant'
+            },
+            'audio-tools': {
+                url: 'text-to-speech.html',
+                status: 'active',
+                name: 'Audio AI Tools'
+            },
+            'text-tools': {
+                url: 'text-ai.html',
+                status: 'active',
+                name: 'Text AI Tools'
+            }
         };
 
-        // Danh sách AI Platforms
+        // AI Platforms
         const platforms = {
             'deepseek': 'https://www.deepseek.com/',
             'grok': 'https://grok.x.ai/',
@@ -529,75 +746,125 @@
             'leonardo': 'https://leonardo.ai/'
         };
 
-        // Danh sách sản phẩm Shopee
-       // Thay thế phần shopeeProducts trong index.html bằng:
-const shopeeProducts = {
-    'airpods': {
-        url: 'https://shopee.vn/search?keyword=tai%20nghe%20bluetooth',
-        name: 'Tai nghe Bluetooth',
-        price: '299.000₫',
-        sold: '50K+'
-    },
-    'iphone': {
-        url: 'https://shopee.vn/search?keyword=iphone%2015',
-        name: 'iPhone 15 Pro Max',
-        price: '25.990.000₫',
-        sold: '5K+'
-    },
-    'watch': {
-        url: 'https://shopee.vn/search?keyword=apple%20watch',
-        name: 'Apple Watch Series 9',
-        price: '8.990.000₫', 
-        sold: '10K+'
-    },
-    'laptop': {
-        url: 'https://shopee.vn/search?keyword=laptop%20gaming',
-        name: 'Laptop Gaming RTX 4060',
-        price: '25.000.000₫',
-        sold: '2K+'
-    },
-    'camera': {
-        url: 'https://shopee.vn/search?keyword=camera%20ip',
-        name: 'Camera IP Wifi 4MP',
-        price: '450.000₫',
-        sold: '30K+'
-    },
-    'keyboard': {
-        url: 'https://shopee.vn/search?keyword=b%C3%A0n%20ph%C3%ADm%20c%C6%A1',
-        name: 'Bàn phím cơ Dareu',
-        price: '690.000₫',
-        sold: '15K+'
-    },
-    'ssd': {
-        url: 'https://shopee.vn/search?keyword=ssd%201tb',
-        name: 'SSD 1TB Samsung',
-        price: '1.290.000₫',
-        sold: '20K+'
-    },
-    'tablet': {
-        url: 'https://shopee.vn/search?keyword=ipad',
-        name: 'iPad Pro M1 11"',
-        price: '15.990.000₫',
-        sold: '8K+'
-    }
-};
+        // Enhanced Shopee products
+        const shopeeProducts = {
+            'airpods': {
+                url: 'https://shopee.vn/search?keyword=tai%20nghe%20bluetooth',
+                name: 'Tai nghe Bluetooth',
+                price: '299.000₫',
+                sold: '50K+'
+            },
+            'iphone': {
+                url: 'https://shopee.vn/search?keyword=iphone%2015',
+                name: 'iPhone 15 Pro Max',
+                price: '25.990.000₫',
+                sold: '5K+'
+            },
+            'watch': {
+                url: 'https://shopee.vn/search?keyword=apple%20watch',
+                name: 'Apple Watch Series 9',
+                price: '8.990.000₫', 
+                sold: '10K+'
+            },
+            'laptop': {
+                url: 'https://shopee.vn/search?keyword=laptop%20gaming',
+                name: 'Laptop Gaming RTX 4060',
+                price: '25.000.000₫',
+                sold: '2K+'
+            },
+            'camera': {
+                url: 'https://shopee.vn/search?keyword=camera%20ip',
+                name: 'Camera IP Wifi 4MP',
+                price: '450.000₫',
+                sold: '30K+'
+            },
+            'keyboard': {
+                url: 'https://shopee.vn/search?keyword=b%C3%A0n%20ph%C3%ADm%20c%C6%A1',
+                name: 'Bàn phím cơ Dareu',
+                price: '690.000₫',
+                sold: '15K+'
+            }
+        };
 
-// Cập nhật function openShopee
-function openShopee(productId) {
-    const product = shopeeProducts[productId];
-    if (product) {
-        window.open(product.url, '_blank');
-    }
-}
+        // Initialize the application
+        function initApp() {
+            checkConnection();
+            setupEventListeners();
+            updateUI();
+        }
 
-// Thêm function để hiển thị chi tiết sản phẩm
-function showProductDetail(productId) {
-    const product = shopeeProducts[productId];
-    if (product) {
-        alert(`${product.name}\n💰 Giá: ${product.price}\n🛒 Đã bán: ${product.sold}`);
-    }
-}
+        // Check internet connection
+        function checkConnection() {
+            const statusBadge = document.getElementById('statusBadge');
+            const connectionStatus = document.getElementById('connectionStatus');
+            
+            if (navigator.onLine) {
+                statusBadge.innerHTML = '<i class="fas fa-wifi"></i> Đang trực tuyến';
+                statusBadge.className = 'status-badge';
+                connectionStatus.textContent = 'Kết nối internet ổn định';
+                connectionStatus.style.color = '#10b981';
+            } else {
+                statusBadge.innerHTML = '<i class="fas fa-wifi-slash"></i> Chế độ Offline';
+                statusBadge.className = 'status-badge offline';
+                connectionStatus.textContent = 'Đang ở chế độ ngoại tuyến';
+                connectionStatus.style.color = '#f59e0b';
+                setMode('hybrid');
+            }
+        }
 
+        // Set operation mode
+        function setMode(mode) {
+            currentMode = mode;
+            const buttons = document.querySelectorAll('.mode-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            if (mode === 'online') {
+                document.querySelector('[onclick="setMode(\'online\')"]').classList.add('active');
+            } else {
+                document.querySelector('[onclick="setMode(\'hybrid\')"]').classList.add('active');
+            }
+            
+            updateUI();
+        }
+
+        // Open tool function
+        function openTool(toolId) {
+            const tool = tools[toolId];
+            if (!tool) {
+                alert('Công cụ này đang được phát triển!');
+                return;
+            }
+
+            // Check if tool is available in current mode
+            if (currentMode === 'online' && tool.status === 'offline') {
+                alert('Công cụ này cần kết nối internet. Vui lòng chuyển sang chế độ Hybrid.');
+                return;
+            }
+
+            if (tool.url.includes('http')) {
+                window.open(tool.url, '_blank');
+            } else {
+                window.location.href = tool.url;
+            }
+        }
+
+        // Open platform
+        function openPlatform(platformId) {
+            const platformUrl = platforms[platformId];
+            if (platformUrl) {
+                window.open(platformUrl, '_blank');
+            }
+        }
+
+        // Open Shopee product
+        function openShopee(productId) {
+            const product = shopeeProducts[productId];
+            if (product) {
+                window.open(product.url, '_blank');
+            }
+        }
+
+        // Edit header
         function editHeader() {
             const newTitle = prompt('Nhập tiêu đề mới:', 'AI Magic Box');
             const newDescription = prompt('Nhập mô tả mới:', 'Công cụ AI mạnh mẽ - Hoàn toàn miễn phí');
@@ -610,7 +877,30 @@ function showProductDetail(productId) {
             }
         }
 
-        // Hiệu ứng khi load trang
+        // Setup event listeners
+        function setupEventListeners() {
+            window.addEventListener('online', checkConnection);
+            window.addEventListener('offline', checkConnection);
+        }
+
+        // Update UI based on current mode
+        function updateUI() {
+            const toolStatuses = document.querySelectorAll('.tool-status');
+            toolStatuses.forEach(status => {
+                const toolCard = status.closest('.tool-card');
+                if (currentMode === 'online') {
+                    if (status.textContent === '✅ Hoạt động') {
+                        toolCard.style.opacity = '1';
+                    } else {
+                        toolCard.style.opacity = '0.7';
+                    }
+                } else {
+                    toolCard.style.opacity = '1';
+                }
+            });
+        }
+
+        // Enhanced loading animation
         window.addEventListener('load', () => {
             document.querySelectorAll('.tool-card, .platform-card, .trend-item').forEach((element, index) => {
                 element.style.opacity = '0';
@@ -622,6 +912,28 @@ function showProductDetail(productId) {
                     element.style.transform = 'translateY(0)';
                 }, index * 100);
             });
+
+            // Initialize app
+            initApp();
+        });
+
+        // Add tooltip for products
+        document.addEventListener('DOMContentLoaded', function() {
+            const trendItems = document.querySelectorAll('.trend-item');
+            trendItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateX(10px) scale(1.02)';
+                });
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateX(0) scale(1)';
+                });
+            });
+        });
+
+        // Performance monitoring
+        window.addEventListener('load', function() {
+            const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
+            console.log(`Page loaded in ${loadTime}ms`);
         });
     </script>
 </body>
