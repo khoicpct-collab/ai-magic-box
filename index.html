@@ -307,23 +307,6 @@
             transition: width 0.3s ease;
         }
 
-        /* Video Preview */
-        .video-preview {
-            width: 100%;
-            max-width: 400px;
-            margin: 1rem auto;
-            border-radius: 10px;
-            overflow: hidden;
-            background: rgba(0, 0, 0, 0.3);
-            display: none;
-        }
-
-        .video-preview video {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
         /* Status Messages */
         .status-message {
             padding: 1rem;
@@ -346,6 +329,174 @@
         .status-processing {
             background: rgba(59, 130, 246, 0.3);
             border: 1px solid var(--accent);
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        /* Hot News Section */
+        .hot-news {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 1rem;
+        }
+
+        .news-item {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .news-item:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateX(5px);
+        }
+
+        .news-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--light-blue);
+            line-height: 1.4;
+        }
+
+        .news-source {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .news-time {
+            font-size: 0.7rem;
+            opacity: 0.6;
+        }
+
+        /* Top Products Section */
+        .top-products {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .products-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 1rem;
+        }
+
+        .product-item {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .product-item:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateX(5px);
+        }
+
+        .product-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--light-blue);
+        }
+
+        .product-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+
+        .product-price {
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .product-platform {
+            color: var(--accent);
+            font-size: 0.7rem;
+        }
+
+        /* Trending AI Tools Section */
+        .trending-ai {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .ai-tools-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 1rem;
+        }
+
+        .ai-tool-item {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .ai-tool-item:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateX(5px);
+        }
+
+        .ai-tool-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--light-blue);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ai-tool-desc {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            line-height: 1.4;
         }
 
         /* Main Content */
@@ -435,125 +586,6 @@
             background: var(--success);
         }
 
-        /* Sidebar */
-        .sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
-
-        /* AI Platforms Section */
-        .ai-platforms {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 1.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .platforms-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-
-        .platform-card {
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            padding: 1rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .platform-card:hover {
-            background: rgba(255, 255, 255, 0.12);
-            transform: translateY(-3px);
-        }
-
-        .platform-icon {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-            color: var(--accent);
-        }
-
-        .platform-card span {
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        /* Shopee Trends */
-        .shopee-trends {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 1.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .trends-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .trend-item {
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 10px;
-            padding: 1rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .trend-item:hover {
-            background: rgba(255, 255, 255, 0.12);
-            transform: translateX(5px);
-        }
-
-        .trend-number {
-            background: var(--accent);
-            color: white;
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        .trend-info {
-            flex: 1;
-        }
-
-        .trend-name {
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 2px;
-        }
-
-        .trend-details {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.75rem;
-            opacity: 0.8;
-        }
-
-        .trend-price {
-            color: var(--success);
-            font-weight: bold;
-        }
-
-        .trend-sold {
-            color: var(--accent);
-        }
-
         /* Footer */
         .footer {
             grid-column: 1 / -1;
@@ -616,19 +648,11 @@
             .creator-steps {
                 grid-template-columns: 1fr;
             }
-            
-            .platforms-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
         }
 
         @media (max-width: 768px) {
             .tools-grid {
                 grid-template-columns: 1fr;
-            }
-            
-            .platforms-grid {
-                grid-template-columns: repeat(2, 1fr);
             }
             
             .header {
@@ -741,29 +765,26 @@
                 <!-- Bước 3 -->
                 <div class="step-card">
                     <div class="step-number">3</div>
-                    <h3>Tạo Video Từ JSON</h3>
+                    <h3>Copy JSON Để Sử Dụng</h3>
                     
-                    <textarea class="text-area" id="jsonInput" placeholder="Dán JSON tại đây... Hoặc JSON sẽ tự động được điền"></textarea>
-                    
-                    <button class="btn btn-success" onclick="createVideo()" id="createVideoBtn">
-                        <i class="fas fa-film"></i> Tạo Video
-                    </button>
-                    
-                    <div class="progress-container" id="videoProgress">
-                        <div class="progress-bar" id="videoProgressBar"></div>
+                    <div class="json-output" id="finalJsonOutput" style="min-height: 200px; display: none;">
+                        {/* JSON cuối cùng sẽ hiển thị ở đây */}
                     </div>
                     
-                    <div class="video-preview" id="videoPreview">
-                        <video controls id="previewVideo">
-                            Trình duyệt của bạn không hỗ trợ video.
-                        </video>
-                    </div>
-                    
-                    <button class="btn" onclick="downloadVideo()" id="downloadBtn" style="display: none;">
-                        <i class="fas fa-download"></i> Tải video xuống
+                    <button class="btn btn-success" onclick="copyFinalJSON()" id="copyFinalJsonBtn" style="display: none;">
+                        <i class="fas fa-copy"></i> Copy JSON Để Sử Dụng
                     </button>
                     
                     <div class="status-message" id="step3Status"></div>
+                    
+                    <div class="video-apps-info" style="margin-top: 1rem; text-align: left; font-size: 0.9rem; opacity: 0.8;">
+                        <p><strong>🎯 Hướng dẫn sử dụng JSON:</strong></p>
+                        <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                            <li>Sao chép JSON và dán vào các công cụ AI Video</li>
+                            <li>Hỗ trợ: Runway ML, Pika Labs, Stable Video Diffusion</li>
+                            <li>Tùy chỉnh tham số theo nhu cầu</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
@@ -855,109 +876,130 @@
 
         <!-- Sidebar -->
         <div class="sidebar">
-            <!-- AI Platforms -->
-            <section class="ai-platforms">
-                <h2 class="section-title"><i class="fas fa-robot"></i> AI Platforms</h2>
-                <div class="platforms-grid">
-                    <div class="platform-card" onclick="openPlatform('deepseek')">
-                        <div class="platform-icon">🤖</div>
-                        <span>DeepSeek</span>
-                    </div>
-                    <div class="platform-card" onclick="openPlatform('grok')">
-                        <div class="platform-icon">🧠</div>
-                        <span>Grok</span>
-                    </div>
-                    <div class="platform-card" onclick="openPlatform('dreamina')">
-                        <div class="platform-icon">🎨</div>
-                        <span>Dreamina</span>
-                    </div>
-                    <div class="platform-card" onclick="openPlatform('pencil')">
-                        <div class="platform-icon">✏️</div>
-                        <span>Pencil</span>
-                    </div>
-                    <div class="platform-card" onclick="openPlatform('tiktok')">
-                        <div class="platform-icon">🎵</div>
-                        <span>TikTok</span>
-                    </div>
-                    <div class="platform-card" onclick="openPlatform('canva')">
-                        <div class="platform-icon">🎭</div>
-                        <span>Canva</span>
-                    </div>
-                    <div class="platform-card" onclick="openPlatform('invideo')">
-                        <div class="platform-icon">🎬</div>
-                        <span>InVideo</span>
-                    </div>
-                    <div class="platform-card" onclick="openPlatform('leonardo')">
-                        <div class="platform-icon">🖼️</div>
-                        <span>Leonardo</span>
-                    </div>
+            <!-- Tin tức nóng -->
+            <section class="hot-news">
+                <h2 class="section-title"><i class="fas fa-fire"></i> Tin tức nóng</h2>
+                <div class="news-list">
+                    <a href="https://vnexpress.net" class="news-item" target="_blank">
+                        <div class="news-title">AI có thể thay thế 30% lao động vào năm 2030</div>
+                        <div class="news-source">
+                            <span>VnExpress</span>
+                            <span class="news-time">2 giờ trước</span>
+                        </div>
+                    </a>
+                    <a href="https://tuoitre.vn" class="news-item" target="_blank">
+                        <div class="news-title">ChatGPT-5 sẽ ra mắt vào cuối năm 2024</div>
+                        <div class="news-source">
+                            <span>Tuổi Trẻ</span>
+                            <span class="news-time">4 giờ trước</span>
+                        </div>
+                    </a>
+                    <a href="https://thanhnien.vn" class="news-item" target="_blank">
+                        <div class="news-title">Việt Nam đứng top 5 Đông Nam Á về ứng dụng AI</div>
+                        <div class="news-source">
+                            <span>Thanh Niên</span>
+                            <span class="news-time">5 giờ trước</span>
+                        </div>
+                    </a>
+                    <a href="https://cafef.vn" class="news-item" target="_blank">
+                        <div class="news-title">Cổ phiếu công nghệ AI tăng mạnh trong phiên giao dịch</div>
+                        <div class="news-source">
+                            <span>Cafef</span>
+                            <span class="news-time">6 giờ trước</span>
+                        </div>
+                    </a>
+                    <a href="https://dantri.com.vn" class="news-item" target="_blank">
+                        <div class="news-title">Google ra mắt Gemini Ultra - đối thủ của GPT-4</div>
+                        <div class="news-source">
+                            <span>Dân Trí</span>
+                            <span class="news-time">7 giờ trước</span>
+                        </div>
+                    </a>
                 </div>
             </section>
 
-            <!-- Shopee Trends -->
-            <section class="shopee-trends">
-                <h2 class="section-title"><i class="fas fa-chart-line"></i> Top Shopee</h2>
-                <div class="trends-list">
-                    <div class="trend-item" onclick="openShopee('airpods')">
-                        <div class="trend-number">1</div>
-                        <div class="trend-info">
-                            <div class="trend-name">Tai nghe Bluetooth</div>
-                            <div class="trend-details">
-                                <span class="trend-price">299.000₫</span>
-                                <span class="trend-sold">Đã bán 50K+</span>
-                            </div>
+            <!-- Top Sản Phẩm -->
+            <section class="top-products">
+                <h2 class="section-title"><i class="fas fa-shopping-bag"></i> Top Sản Phẩm</h2>
+                <div class="products-list">
+                    <a href="https://shopee.vn/search?keyword=iphone%2015" class="product-item" target="_blank">
+                        <div class="product-name">iPhone 15 Pro Max 256GB</div>
+                        <div class="product-details">
+                            <span class="product-price">25.990.000₫</span>
+                            <span class="product-platform">Shopee</span>
                         </div>
-                    </div>
-                    <div class="trend-item" onclick="openShopee('iphone')">
-                        <div class="trend-number">2</div>
-                        <div class="trend-info">
-                            <div class="trend-name">iPhone 15 Pro Max</div>
-                            <div class="trend-details">
-                                <span class="trend-price">25.990.000₫</span>
-                                <span class="trend-sold">Đã bán 5K+</span>
-                            </div>
+                    </a>
+                    <a href="https://www.lazada.vn/products/iphone-15-pro-max-i1234567890.html" class="product-item" target="_blank">
+                        <div class="product-name">iPhone 15 Pro Max 512GB</div>
+                        <div class="product-details">
+                            <span class="product-price">29.990.000₫</span>
+                            <span class="product-platform">Lazada</span>
                         </div>
-                    </div>
-                    <div class="trend-item" onclick="openShopee('watch')">
-                        <div class="trend-number">3</div>
-                        <div class="trend-info">
-                            <div class="trend-name">Apple Watch Series 9</div>
-                            <div class="trend-details">
-                                <span class="trend-price">8.990.000₫</span>
-                                <span class="trend-sold">Đã bán 10K+</span>
-                            </div>
+                    </a>
+                    <a href="https://shopee.vn/search?keyword=airpods%20pro%202" class="product-item" target="_blank">
+                        <div class="product-name">AirPods Pro 2 2023</div>
+                        <div class="product-details">
+                            <span class="product-price">5.990.000₫</span>
+                            <span class="product-platform">Shopee</span>
                         </div>
-                    </div>
-                    <div class="trend-item" onclick="openShopee('laptop')">
-                        <div class="trend-number">4</div>
-                        <div class="trend-info">
-                            <div class="trend-name">Laptop Gaming RTX 4060</div>
-                            <div class="trend-details">
-                                <span class="trend-price">25.000.000₫</span>
-                                <span class="trend-sold">Đã bán 2K+</span>
-                            </div>
+                    </a>
+                    <a href="https://www.lazada.vn/products/apple-watch-series-9-i1234567891.html" class="product-item" target="_blank">
+                        <div class="product-name">Apple Watch Series 9 45mm</div>
+                        <div class="product-details">
+                            <span class="product-price">8.990.000₫</span>
+                            <span class="product-platform">Lazada</span>
                         </div>
-                    </div>
-                    <div class="trend-item" onclick="openShopee('camera')">
-                        <div class="trend-number">5</div>
-                        <div class="trend-info">
-                            <div class="trend-name">Camera IP Wifi 4MP</div>
-                            <div class="trend-details">
-                                <span class="trend-price">450.000₫</span>
-                                <span class="trend-sold">Đã bán 30K+</span>
-                            </div>
+                    </a>
+                    <a href="https://shopee.vn/search?keyword=macbook%20pro%20m3" class="product-item" target="_blank">
+                        <div class="product-name">MacBook Pro M3 14 inch</div>
+                        <div class="product-details">
+                            <span class="product-price">45.990.000₫</span>
+                            <span class="product-platform">Shopee</span>
                         </div>
-                    </div>
-                    <div class="trend-item" onclick="openShopee('keyboard')">
-                        <div class="trend-number">6</div>
-                        <div class="trend-info">
-                            <div class="trend-name">Bàn phím cơ Dareu</div>
-                            <div class="trend-details">
-                                <span class="trend-price">690.000₫</span>
-                                <span class="trend-sold">Đã bán 15K+</span>
-                            </div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Trending AI Tools -->
+            <section class="trending-ai">
+                <h2 class="section-title"><i class="fas fa-robot"></i> Top Công Cụ AI</h2>
+                <div class="ai-tools-list">
+                    <a href="https://chat.openai.com" class="ai-tool-item" target="_blank">
+                        <div class="ai-tool-name">
+                            <i class="fab fa-openai"></i> ChatGPT-4
                         </div>
-                    </div>
+                        <div class="ai-tool-desc">AI chat thông minh nhất hiện nay</div>
+                    </a>
+                    <a href="https://gemini.google.com" class="ai-tool-item" target="_blank">
+                        <div class="ai-tool-name">
+                            <i class="fas fa-robot"></i> Google Gemini
+                        </div>
+                        <div class="ai-tool-desc">Đối thủ cạnh tranh của ChatGPT</div>
+                    </a>
+                    <a href="https://midjourney.com" class="ai-tool-item" target="_blank">
+                        <div class="ai-tool-name">
+                            <i class="fas fa-palette"></i> Midjourney
+                        </div>
+                        <div class="ai-tool-desc">Tạo ảnh nghệ thuật từ văn bản</div>
+                    </a>
+                    <a href="https://runwayml.com" class="ai-tool-item" target="_blank">
+                        <div class="ai-tool-name">
+                            <i class="fas fa-video"></i> Runway ML
+                        </div>
+                        <div class="ai-tool-desc">Tạo và chỉnh sửa video bằng AI</div>
+                    </a>
+                    <a href="https://www.deepseek.com" class="ai-tool-item" target="_blank">
+                        <div class="ai-tool-name">
+                            <i class="fas fa-brain"></i> DeepSeek
+                        </div>
+                        <div class="ai-tool-desc">AI mã nguồn mở miễn phí</div>
+                    </a>
+                    <a href="https://leonardo.ai" class="ai-tool-item" target="_blank">
+                        <div class="ai-tool-name">
+                            <i class="fas fa-paint-brush"></i> Leonardo AI
+                        </div>
+                        <div class="ai-tool-desc">Tạo ảnh game và concept art</div>
+                    </a>
                 </div>
             </section>
         </div>
@@ -1082,6 +1124,8 @@ GỢI Ý TẠO VIDEO TƯƠNG TỰ:
             const promptInput = document.getElementById('promptInput').value.trim();
             const jsonOutput = document.getElementById('jsonOutput');
             const copyJsonBtn = document.getElementById('copyJsonBtn');
+            const finalJsonOutput = document.getElementById('finalJsonOutput');
+            const copyFinalJsonBtn = document.getElementById('copyFinalJsonBtn');
             
             if (!promptInput) {
                 showStatus('step2Status', 'Vui lòng nhập prompt hoặc phân tích video trước!', 'error');
@@ -1098,7 +1142,9 @@ GỢI Ý TẠO VIDEO TƯƠNG TỰ:
                 copyJsonBtn.style.display = 'inline-block';
                 
                 // Auto-fill step 3
-                document.getElementById('jsonInput').value = generatedJSON;
+                finalJsonOutput.textContent = generatedJSON;
+                finalJsonOutput.style.display = 'block';
+                copyFinalJsonBtn.style.display = 'inline-block';
                 
                 showStatus('step2Status', 'Chuyển đổi thành công! JSON đã sẵn sàng.', 'success');
             }, 1500);
@@ -1164,45 +1210,12 @@ GỢI Ý TẠO VIDEO TƯƠNG TỰ:
             });
         }
 
-        function createVideo() {
-            const jsonInput = document.getElementById('jsonInput').value.trim();
-            const videoProgress = document.getElementById('videoProgress');
-            const videoProgressBar = document.getElementById('videoProgressBar');
-            const videoPreview = document.getElementById('videoPreview');
-            const downloadBtn = document.getElementById('downloadBtn');
-            
-            if (!jsonInput) {
-                showStatus('step3Status', 'Vui lòng nhập JSON hoặc chuyển đổi từ prompt!', 'error');
-                return;
-            }
-
-            videoProgress.style.display = 'block';
-            showStatus('step3Status', 'Đang tạo video... Vui lòng chờ!', 'processing');
-
-            // Simulate video creation process
-            let progress = 0;
-            const interval = setInterval(() => {
-                progress += Math.random() * 8;
-                if (progress >= 100) {
-                    progress = 100;
-                    clearInterval(interval);
-                    
-                    // Show video preview (simulated)
-                    videoPreview.style.display = 'block';
-                    downloadBtn.style.display = 'inline-block';
-                    
-                    showStatus('step3Status', 'Tạo video thành công! Bạn có thể xem trước và tải xuống.', 'success');
-                }
-                videoProgressBar.style.width = progress + '%';
-            }, 300);
-        }
-
-        function downloadVideo() {
-            showStatus('step3Status', 'Đang chuẩn bị tải xuống...', 'processing');
-            // In real implementation, this would download the actual video file
-            setTimeout(() => {
-                showStatus('step3Status', 'Video đã sẵn sàng để tải xuống!', 'success');
-            }, 1000);
+        function copyFinalJSON() {
+            navigator.clipboard.writeText(generatedJSON).then(() => {
+                showStatus('step3Status', 'Đã sao chép JSON! Dán vào công cụ AI Video để sử dụng.', 'success');
+            }).catch(err => {
+                showStatus('step3Status', 'Lỗi khi sao chép: ' + err, 'error');
+            });
         }
 
         function showStatus(elementId, message, type) {
@@ -1270,12 +1283,46 @@ GỢI Ý TẠO VIDEO TƯƠNG TỰ:
                 const files = dt.files;
                 handleFileUpload(files);
             }
+
+            // Initialize connection status
+            checkConnection();
         });
 
-        // Rest of your existing JavaScript functions...
-        // [Giữ nguyên tất cả các hàm JavaScript cũ từ code trước]
-        // ... (các hàm initApp, checkConnection, setMode, openTool, openPlatform, openShopee, etc.)
+        // Connection status check
+        function checkConnection() {
+            const connectionStatus = document.getElementById('connectionStatus');
+            
+            if (navigator.onLine) {
+                connectionStatus.textContent = 'Kết nối internet ổn định';
+                connectionStatus.style.color = '#10b981';
+            } else {
+                connectionStatus.textContent = 'Đang ở chế độ ngoại tuyến';
+                connectionStatus.style.color = '#f59e0b';
+                setMode('hybrid');
+            }
+        }
 
+        // Set operation mode
+        function setMode(mode) {
+            currentMode = mode;
+            const buttons = document.querySelectorAll('.mode-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            if (mode === 'online') {
+                document.querySelector('[onclick="setMode(\'online\')"]').classList.add('active');
+            } else {
+                document.querySelector('[onclick="setMode(\'hybrid\')"]').classList.add('active');
+            }
+        }
+
+        // Tool opening functions
+        function openTool(toolId) {
+            alert(`Tính năng ${toolId} đang được kích hoạt!`);
+        }
+
+        // Event listeners for online/offline status
+        window.addEventListener('online', checkConnection);
+        window.addEventListener('offline', checkConnection);
     </script>
 </body>
 </html>
